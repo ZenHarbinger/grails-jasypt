@@ -1,14 +1,3 @@
-// locations to search for config files that get merged into the main config
-// config files can either be Java properties files or ConfigSlurper scripts
-
-// grails.config.locations = [ "classpath:${appName}-config.properties",
-//                             "classpath:${appName}-config.groovy",
-//                             "file:${userHome}/.grails/${appName}-config.properties",
-//                             "file:${userHome}/.grails/${appName}-config.groovy"]
-
-// if(System.properties["${appName}.config.location"]) {
-//    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
-// }
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
 grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
@@ -24,22 +13,15 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
                       form: 'application/x-www-form-urlencoded',
                       multipartForm: 'multipart/form-data'
                     ]
-// The default codec used to encode data with ${}
 grails.views.default.codec="none" // none, html, base64
 grails.views.gsp.encoding="UTF-8"
 grails.converters.encoding="UTF-8"
-// enable Sitemesh preprocessing of GSP pages
 grails.views.gsp.sitemesh.preprocess = true
-// scaffolding templates configuration
 grails.scaffolding.templates.domainSuffix = 'Instance'
 
-// Set to false to use the new Grails 1.2 JSONBuilder in the render method
 grails.json.legacy.builder=false
-// enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
-// whether to install the java.util.logging bridge for sl4j. Disable fo AppEngine!
 grails.logging.jul.usebridge = true
-// packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 
 // set per-environment serverURL stem for creating absolute links

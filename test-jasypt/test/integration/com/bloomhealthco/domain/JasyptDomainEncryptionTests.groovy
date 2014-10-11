@@ -5,10 +5,8 @@ import groovy.sql.Sql
 
 class JasyptDomainEncryptionTests extends GrailsUnitTestCase {
     def dataSource
-    def sessionFactory
-    def grailsApplication
 
-    def CORRELATION_ID = "ABC123"
+    String CORRELATION_ID = "ABC123"
 
     protected void setUp() {
         super.setUp()
@@ -56,7 +54,7 @@ class JasyptDomainEncryptionTests extends GrailsUnitTestCase {
 
     void testSaltingEncryptsSameValueDifferentlyEachTime() {
         def originalPatient = new Patient(firstName: "foo", lastName: "foo", correlationId: CORRELATION_ID)
-		originalPatient.save(failOnError: "true")
+        originalPatient.save(failOnError: "true")
 
         withPatientForCorrelationId(CORRELATION_ID) { patient, rawPatient ->
             assertEquals "foo", patient.firstName
@@ -73,7 +71,7 @@ class JasyptDomainEncryptionTests extends GrailsUnitTestCase {
         (1..256).each { val ->
             def firstName = LONG_NAME_256.substring(0, val)
             Patient.build(firstName: firstName, correlationId: val)
-            
+
             withPatientForCorrelationId(val) { patient, rawPatient ->
                 assertNotNull patient
                 assertEquals firstName, patient.firstName

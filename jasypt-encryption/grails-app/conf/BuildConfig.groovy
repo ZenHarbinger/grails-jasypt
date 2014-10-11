@@ -1,38 +1,32 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
-grails.project.dependency.resolution = {
-    // inherit Grails' default dependencies
-    inherits("global") {
-        // uncomment to disable ehcache
-        // excludes 'ehcache'
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
-    repositories {
-        grailsPlugins()
-        grailsHome()
-        grailsCentral()
+grails.project.work.dir = "target/work"
 
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+grails.project.dependency.resolver = "maven"
+
+grails.project.dependency.resolution = {
+
+    inherits("global") {
     }
+    log "warn"
+
+    repositories {
+        grailsCentral()
+        mavenLocal()
+        mavenCentral()
+    }
+
     dependencies {
-        runtime 'org.jasypt:jasypt:1.9.0'
-        runtime 'org.jasypt:jasypt-hibernate3:1.9.0'
+        runtime 'org.jasypt:jasypt:1.9.2'
+        runtime 'org.jasypt:jasypt-hibernate3:1.9.2'
         runtime 'org.bouncycastle:bcprov-jdk16:1.46'
     }
 
     plugins {
-        // need to have svn as release keeps installing it
-        build(":release:1.0.0", ":svn:1.0.1") {
+        build ':release:3.0.1', ':rest-client-builder:1.0.3', {
             export = false
         }
+        runtime ":hibernate:3.6.10.13"
     }
 }

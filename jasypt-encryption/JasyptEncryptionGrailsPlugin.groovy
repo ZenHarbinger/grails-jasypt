@@ -11,53 +11,24 @@ class JasyptEncryptionGrailsPlugin {
         Security.addProvider(new BouncyCastleProvider());
     }
 
-    def version = "1.0.1"
-
-    def grailsVersion = "2.0.0 > *"
-
+    def version = "1.2.0"
+    def grailsVersion = "2.3 > *"
     def dependsOn = [:]
-
-    def pluginExcludes = [
-            "grails-app/views/error.gsp"
-    ]
-
+    def pluginExcludes = []
     def author = "Ted Naleid"
     def authorEmail = "contact@naleid.com"
     def title = "Jasypt Encryption"
     def description = '''\\
 Grails integration with Jasypt, allows easy encryption of information, including Hibernate/GORM integration.
 '''
-
+    def license = "APACHE"
     def developers = [
-            [ name: "Ted Naleid" ],
-            [ name: "Jon Palmer" ]
+            [name: "Ted Naleid"],
+            [name: "Jon Palmer"],
+            [name: "Dan Tanner"],
     ]
-
     def documentation = "http://grails.org/plugin/jasypt-encryption"
+    def issueManagement = [system: "GITHUB", url: "https://github.com/dtanner/grails-jasypt/issues"]
+    def scm = [url: "https://github.com/dtanner/grails-jasypt"]
 
-    def issueManagement = [ system: 'bitbucket', url: 'https://bitbucket.org/tednaleid/grails-jasypt/issues' ]
-
-    def doWithWebDescriptor = { xml ->
-
-    }
-
-    def doWithSpring = {
-
-    }
-
-    def doWithDynamicMethods = { ctx ->
-
-    }
-
-    def doWithApplicationContext = { applicationContext ->
-
-    }
-
-    def onChange = { event ->
-
-    }
-
-    def onConfigChange = { event ->
-
-    }
 }

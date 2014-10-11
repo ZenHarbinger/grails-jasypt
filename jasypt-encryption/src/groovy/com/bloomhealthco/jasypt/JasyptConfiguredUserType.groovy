@@ -1,6 +1,6 @@
 package com.bloomhealthco.jasypt
 
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import grails.util.Holders
 import org.hibernate.usertype.ParameterizedType
 import org.hibernate.usertype.UserType
 import org.jasypt.hibernate3.type.ParameterNaming
@@ -78,6 +78,6 @@ class JasyptConfiguredUserType<T extends UserType & ParameterizedType> extends D
      * @return the jasypt config specified in Config.groovy
      */
     def getJasyptConfig() {
-        return ConfigurationHolder.config?.jasypt ?: [:]
+        return Holders.config?.jasypt ?: [:]
     }
 }
