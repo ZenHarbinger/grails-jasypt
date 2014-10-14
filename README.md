@@ -99,13 +99,13 @@ class Member {
 }
 ```
 
-One other caveat, if you're setting the length of the field within the database schema, you'll need to give yourself extra room as the encrypted value will be longer than the unencrypted value was.   This length will depend on the encryption algorithm that you use.  It's easy to write an integration test that can spit out all of the encrypted lengths for you.  See the http://bitbucket.org/tednaleid/grails-jasypt/src/tip/test-jasypt/test/integration/com/bloomhealthco/domain/JasyptDomainEncryptionTests.groovy for an example.
+One other caveat, if you're setting the length of the field within the database schema, you'll need to give yourself extra room as the encrypted value will be longer than the unencrypted value was.   This length will depend on the encryption algorithm that you use.  It's easy to write an integration test that can spit out all of the encrypted lengths for you.  See `testEncryptionWithLongNamesFit()` in the https://github.com/dtanner/grails-jasypt/blob/master/test-jasypt/test/integration/com/bloomhealthco/domain/JasyptDomainEncryptionTests.groovy for an example.
 
 ### Custom Encryption Types
 
 As of version 1.1 the plugin provides 'Gorm' versions of all the built in Encrypted types provide by the jasypt plugin, http://www.jasypt.org/hibernate.html.
 
-It is also possible to define your own GORM encrypted types. This happens in two steps. First, you need a UserType that handles the encryption. This might be a class you have already from a existing java application or you could extend the jasypt class  https://jasypt.svn.sourceforge.net/svnroot/jasypt/trunk/jasypt-hibernate3/src/main/java/org/jasypt/hibernate3/type/AbstractEncryptedAsStringType.java|AbstractEncryptedAsStringType. Second, you define a new Gorm Encrypted type that composes that UserType to provide the wiring to the Grails configuration.
+It is also possible to define your own GORM encrypted types. This happens in two steps. First, you need a UserType that handles the encryption. This might be a class you have already from a existing java application or you could extend the jasypt class  [AbstractEncryptedAsStringType](https://jasypt.svn.sourceforge.net/svnroot/jasypt/trunk/jasypt-hibernate3/src/main/java/org/jasypt/hibernate3/type/AbstractEncryptedAsStringType.java). Second, you define a new Gorm Encrypted type that composes that UserType to provide the wiring to the Grails configuration.
 
 Here's an example that can encrypt joda-time dates (requires the joda-time jar to work):
 
