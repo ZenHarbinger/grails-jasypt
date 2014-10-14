@@ -19,6 +19,7 @@ stacktrace.log
 */reports/
 *.orig
 *.zip
+*.sha1
 */docs
 .DS_Store
 */.DS_Store
@@ -33,3 +34,7 @@ sitemesh.xml
 *Db.script
 /plugins
 /web-app/plugins
+jasypt-encryption/web-app/WEB-INF/tld/c.tld
+jasypt-encryption/web-app/WEB-INF/tld/fmt.tld
+test-jasypt/web-app/WEB-INF/tld/c.tld
+test-jasypt/web-app/WEB-INF/tld/fmt.tld
