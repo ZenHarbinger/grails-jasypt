@@ -1,5 +1,7 @@
 package com.bloomhealthco.jasypt
 
-public final class GormEncryptedCalendarAsStringType extends JasyptConfiguredUserType<org.jasypt.hibernate3.type.EncryptedCalendarAsStringType> {
+import groovy.transform.CompileStatic
 
+@CompileStatic
+final class GormEncryptedCalendarAsStringType extends JasyptConfiguredUserType<org.jasypt.hibernate3.type.EncryptedCalendarAsStringType> {
 }

@@ -1,7 +1,10 @@
 package com.bloomhealthco.jasypt
 
+import groovy.transform.CompileStatic
+
 import java.sql.PreparedStatement
 import java.sql.ResultSet
+
 import org.hibernate.usertype.ParameterizedType
 import org.hibernate.usertype.UserType
 
@@ -13,15 +16,12 @@ import org.hibernate.usertype.UserType
  * We'd love to use a Mixin but Hibernate's reflection utils don't play nice with Groovys ryntime mixins
  * @param < T > the existing Parameterized UserType we want to add the default parmaters to
  */
+@CompileStatic
 abstract class DefaultParametersUserType<T extends UserType & ParameterizedType> implements UserType, ParameterizedType {
 
     // Nifty little reflection trick to figure out the actual class the subclass provides
     // UserTypes have to have a default parameterless constructor so we're safe to call it here
-    private final T innerType = this.class.genericSuperclass.actualTypeArguments[0].newInstance()
-
-    protected T getInnerType() {
-        innerType
-    }
+    protected final T innerType = (T)((Class<T>)(((java.lang.reflect.ParameterizedType)getClass().genericSuperclass).actualTypeArguments[0])).newInstance()
 
     int[] sqlTypes() {
         innerType.sqlTypes()
@@ -31,23 +31,23 @@ abstract class DefaultParametersUserType<T extends UserType & ParameterizedType>
         innerType.returnedClass()
     }
 
-    boolean equals(final Object x, final Object y) {
+    boolean equals(x, y) {
         innerType.equals(x, y)
     }
 
-    int hashCode(final Object x) {
+    int hashCode(x) {
         innerType.hashCode(x)
     }
 
-    Object nullSafeGet(final ResultSet resultSet, final String[] names, final Object owner) {
+    def nullSafeGet(ResultSet resultSet, String[] names, owner) {
         innerType.nullSafeGet(resultSet, names, owner)
     }
 
-    void nullSafeSet(final PreparedStatement preparedStatement, Object value, int index) {
+    void nullSafeSet(PreparedStatement preparedStatement, value, int index) {
         innerType.nullSafeSet(preparedStatement, value, index)
     }
 
-    Object deepCopy(final Object value) {
+    def deepCopy(value) {
         innerType.deepCopy(value)
     }
 
@@ -55,21 +55,21 @@ abstract class DefaultParametersUserType<T extends UserType & ParameterizedType>
         innerType.isMutable()
     }
 
-    Serializable disassemble(final Object value) {
+    Serializable disassemble(value) {
         innerType.disassemble(value)
     }
 
-    Object assemble(final Serializable cached, final Object owner) {
+    def assemble(Serializable cached, owner) {
         innerType.assemble(cached, owner)
     }
 
-    Object replace(Object original, Object target, Object owner) {
+    def replace(original, target, owner) {
         innerType.replace(original, target, owner)
     }
 
-    void setParameterValues(final Properties properties) {
+    void setParameterValues(Properties properties) {
         def params = defaultParameters + (properties ?: [:]) as Properties
-        innerType.setParameterValues(params)
+        ((DefaultParametersUserType)innerType).setParameterValues params
     }
 
     abstract Map getDefaultParameters()
