@@ -1,7 +1,5 @@
 package com.bloomhealthco.jasypt
 
-import groovy.transform.CompileStatic
-
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 
@@ -16,7 +14,6 @@ import org.hibernate.usertype.UserType
  * We'd love to use a Mixin but Hibernate's reflection utils don't play nice with Groovys ryntime mixins
  * @param < T > the existing Parameterized UserType we want to add the default parmaters to
  */
-@CompileStatic
 abstract class DefaultParametersUserType<T extends UserType & ParameterizedType> implements UserType, ParameterizedType {
 
     // Nifty little reflection trick to figure out the actual class the subclass provides
@@ -69,7 +66,7 @@ abstract class DefaultParametersUserType<T extends UserType & ParameterizedType>
 
     void setParameterValues(Properties properties) {
         def params = defaultParameters + (properties ?: [:]) as Properties
-        ((DefaultParametersUserType)innerType).setParameterValues params
+        innerType.setParameterValues(params)
     }
 
     abstract Map getDefaultParameters()
