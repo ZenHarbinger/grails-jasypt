@@ -1,12 +1,15 @@
 package com.bloomhealthco.jasypt
 
 import grails.util.Holders
+import groovy.transform.CompileStatic
+
 import org.hibernate.usertype.ParameterizedType
 import org.hibernate.usertype.UserType
 import org.jasypt.hibernate3.type.ParameterNaming
 
+@CompileStatic
 class JasyptConfiguredUserType<T extends UserType & ParameterizedType> extends DefaultParametersUserType<T> {
-    
+
     /**
      *  you can define an encryptor in your grails-app/conf/spring/resources.groovy file that
      *  contains an encryptor with a default name of 'gormEncryptor'
@@ -35,7 +38,8 @@ class JasyptConfiguredUserType<T extends UserType & ParameterizedType> extends D
      * @return a default config that expects an encryptor name of gormEncryptor
      */
     Map getDefaultParameters() {
-        def defaultParameters = [:] + jasyptConfig
+        Map<String, Object> defaultParameters = new LinkedHashMap<String, Object>((int)jasyptConfig.size())
+		  defaultParameters.putAll(jasyptConfig)
         if (
                 !defaultParameters[ParameterNaming.ALGORITHM] &&
                         !defaultParameters[ParameterNaming.PASSWORD] &&
@@ -77,7 +81,7 @@ class JasyptConfiguredUserType<T extends UserType & ParameterizedType> extends D
      *
      * @return the jasypt config specified in Config.groovy
      */
-    def getJasyptConfig() {
-        return Holders.config?.jasypt ?: [:]
+    Map<String, Object> getJasyptConfig() {
+        (Map<String, Object>)(Holders.config?.jasypt ?: [:])
     }
 }

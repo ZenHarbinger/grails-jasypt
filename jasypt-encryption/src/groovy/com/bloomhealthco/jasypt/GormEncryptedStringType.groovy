@@ -1,5 +1,7 @@
 package com.bloomhealthco.jasypt
 
-public class GormEncryptedStringType extends JasyptConfiguredUserType<org.jasypt.hibernate3.type.EncryptedStringType> {
+import groovy.transform.CompileStatic
 
+@CompileStatic
+class GormEncryptedStringType extends JasyptConfiguredUserType<org.jasypt.hibernate3.type.EncryptedStringType> {
 }
