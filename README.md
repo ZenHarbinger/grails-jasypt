@@ -6,7 +6,7 @@ It also comes with the [Bouncy Castle](http://www.bouncycastle.org/java.html) en
 
 ```
 plugins {
-    compile ":jasypt-encryption:1.2.0"
+    compile ":jasypt-encryption:1.2.1"
 }
 ```
 
