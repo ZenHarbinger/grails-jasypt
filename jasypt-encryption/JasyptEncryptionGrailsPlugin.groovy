@@ -12,7 +12,7 @@ class JasyptEncryptionGrailsPlugin {
         Security.addProvider new BouncyCastleProvider()
     }
 
-    def version = "1.2.0"
+    def version = "1.2.1"
     def grailsVersion = "2.3 > *"
     def title = "Jasypt Encryption"
     def description = 'Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration'
@@ -20,7 +20,7 @@ class JasyptEncryptionGrailsPlugin {
     def developers = [
             [name: "Ted Naleid", email: 'contact@naleid.com'],
             [name: "Jon Palmer"],
-            [name: "Dan Tanner"],
+            [name: "Dan Tanner", email: 'dan@dantanner.com'],
     ]
     def documentation = "http://grails.org/plugin/jasypt-encryption"
     def issueManagement = [system: "GITHUB", url: "https://github.com/dtanner/grails-jasypt/issues"]
