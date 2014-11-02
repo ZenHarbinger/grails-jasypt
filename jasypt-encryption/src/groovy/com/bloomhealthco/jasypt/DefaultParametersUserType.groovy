@@ -2,6 +2,7 @@ package com.bloomhealthco.jasypt
 
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
+import org.hibernate.engine.spi.SessionImplementor
 
 import java.sql.PreparedStatement
 import java.sql.ResultSet
@@ -40,12 +41,12 @@ abstract class DefaultParametersUserType<T extends UserType & ParameterizedType>
         innerType.hashCode(x)
     }
 
-    def nullSafeGet(ResultSet resultSet, String[] names, owner) {
-        innerType.nullSafeGet(resultSet, names, owner)
+    def nullSafeGet(ResultSet resultSet, String[] names, SessionImplementor sessionImplementor, owner) {
+        innerType.nullSafeGet(resultSet, names, null, owner)
     }
 
-    void nullSafeSet(PreparedStatement preparedStatement, value, int index) {
-        innerType.nullSafeSet(preparedStatement, value, index)
+    void nullSafeSet(PreparedStatement preparedStatement, value, int index, SessionImplementor sessionImplementor) {
+        innerType.nullSafeSet(preparedStatement, value, index, null)
     }
 
     def deepCopy(value) {

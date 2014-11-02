@@ -12,8 +12,8 @@ class JasyptEncryptionGrailsPlugin {
         Security.addProvider new BouncyCastleProvider()
     }
 
-    def version = "1.2.1"
-    def grailsVersion = "2.3 > *"
+    def version = "1.3.1"
+    def grailsVersion = "2.4 > *"
     def title = "Jasypt Encryption"
     def description = 'Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration'
     def license = "APACHE"

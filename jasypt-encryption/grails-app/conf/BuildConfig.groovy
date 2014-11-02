@@ -14,7 +14,7 @@ grails.project.dependency.resolution = {
 
     dependencies {
         runtime 'org.jasypt:jasypt:1.9.2'
-        runtime 'org.jasypt:jasypt-hibernate3:1.9.2'
+        runtime 'org.jasypt:jasypt-hibernate4:1.9.2'
         runtime 'org.bouncycastle:bcprov-jdk16:1.46'
     }
 
@@ -23,7 +23,7 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-        runtime ':hibernate:3.6.10.13', {
+        runtime ':hibernate4:4.3.5.5', {
             export = false
         }
     }
