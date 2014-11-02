@@ -6,9 +6,11 @@ It also comes with the [Bouncy Castle](http://www.bouncycastle.org/java.html) en
 
 ```
 plugins {
-    compile ":jasypt-encryption:1.2.1"
+    compile ":jasypt-encryption:x.x.x"
 }
 ```
+If your app is configured to use **Hibernate 3**, then use version **1.2.1** of this plugin.  
+If your app is configured to use **Hibernate 4**, then use version **1.3.1** of this plugin.
 
 ### Configuration
 
@@ -143,7 +145,8 @@ For now, documentation is a little light.  There's a [test proejct](https://gith
 
 
 ### Release Notes
-
+* 1.3.1 - initial support for Hibernate 4
+* 1.2.1 - code cleanup contribution from Burt Beckwith
 * 1.2.0 - support grails 2.3.8 and up
 * 1.1.0 - Support all the encrypted UserTypes provided by jasypt's hibernate support while reusing the existing implementations; thanks to Jon Palmer for pull request & work on this
 * 1.0.0 - upgraded to jasypt 1.9 - support for grails 2.0.0 thanks to pull request from Jon Palmer
