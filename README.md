@@ -47,11 +47,11 @@ A:  Run the code from this [gist on github](https://gist.github.com/jehrhardt/51
 
 or
 
-B:  crack open your `$JAVA_HOME/lib/local_policy.jar` to see what's inside.:
+B:  crack open your `$JAVA_HOME/jre/lib/security/local_policy.jar` to see what's inside.:
 
 ```
 % cd /tmp
-% cp $JAVA_HOME/lib/security/local_policy.jar .
+% cp $JAVA_HOME/jre/lib/security/local_policy.jar .
 % jar xvf local_policy.jar
  inflated: META-INF/MANIFEST.MF
  inflated: META-INF/JCE_RSA.SF
@@ -71,15 +71,15 @@ If the permissions look like that, you're set.    Mac laptops bought in the US h
 
 Installing the new jar files is easy, just go download the "Java Cryptography Extension (JCE)" [under "Other Downloads" on Oracle's website](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
-Unzip the zip file and copy the jar files into your `$JAVA_HOME/lib/security directory` to overwrite the existing, limited encryption jars.  
+Unzip the zip file and copy the jar files into your `$JAVA_HOME/jre/lib/security directory` to overwrite the existing, limited encryption jars.  
 
 ```sh
 #make a backup copy of your existing files
 mkdir old_java_security
-cp -r $JAVA_HOME/lib/security old_java_security
+cp -r $JAVA_HOME/jre/lib/security old_java_security
 
 unzip jce_policy-6.zip
-sudo cp jce/*.jar $JAVA_HOME/lib/security
+sudo cp jce/*.jar $JAVA_HOME/jre/lib/security
 ```
 
 ### Defining Fields in your Domain to Encrypt
