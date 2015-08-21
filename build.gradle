@@ -16,7 +16,7 @@ plugins {
     id "com.jfrog.bintray" version "1.2"
 }
 
-version "2.0.1-SNAPSHOT"
+version "2.0.1"
 group "org.grails.plugins"
 
 apply plugin: 'maven-publish'
@@ -93,3 +93,28 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
+
+jar {
+    exclude "application.groovy"
+    exclude "src/test/projects/**"
+}
+
+bintray {
+    pkg {
+        userOrg = 'dtanner'
+        repo = 'grails-plugins'
+        name = "org.grails.plugins:$project.name"
+        desc = "Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration"
+        websiteUrl = "http://grails.org/plugin/$project.name"
+        issueTrackerUrl = "https://github.com/dtanner/grails-jasypt/issues"
+        vcsUrl = "https://github.com/dtanner/grails-jasypt"
+        licenses = ['Apache-2.0']
+        publicDownloadNumbers = true
+        version {
+            attributes = ['grails-plugin': "org.grails.plugins:$project.name"]
+            name = project.version
+        }
+    }
+}
+
+bintrayUpload.dependsOn build, sourcesJar, javadocJar

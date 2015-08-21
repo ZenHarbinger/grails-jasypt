@@ -1,6 +1,8 @@
+sudo: false
 language: groovy
 jdk:
-  - oraclejdk7
-script: ./gradlew clean check install
-  && cd src/test/projects/sample
-  && ./gradlew check
+  - oraclejdk8
+script:
+  - ./gradlew install
+  - cd src/test/projects/sample
+  - ./gradlew check
