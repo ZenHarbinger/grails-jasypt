@@ -9,8 +9,9 @@ plugins {
     compile ":jasypt-encryption:x.x.x"
 }
 ```
-If your app is configured to use **Hibernate 3**, then use version **1.2.1** of this plugin.  
-If your app is configured to use **Hibernate 4**, then use version **1.3.1** of this plugin.
+If your app is using **Grails 3** or higher, then use version **2.0.1** of this plugin.
+If your app is using **Grails 2** and **Hibernate 4**, then use version **1.3.1** of this plugin.
+If your app is using **Grails 2** and **Hibernate 3**, then use version **1.2.1** of this plugin.  
 
 ### Configuration
 
@@ -141,10 +142,11 @@ public class GormEncryptedLocalDateAsStringType extends JasyptConfiguredUserType
 
 ### Further Documentation
 
-For now, documentation is a little light.  There's a [test proejct](https://github.com/dtanner/grails-jasypt/tree/master/test-jasypt) checked in as part of the repository that shows the plugin being used (and has tests that exercise the functionality).  The [Patient domain object](https://github.com/dtanner/grails-jasypt/blob/master/test-jasypt/grails-app/domain/com/bloomhealthco/domain/Patient.groovy) has encrypted firstName and lastName fields on it.
+For now, documentation is a little light.  There's a [test project](https://github.com/dtanner/grails-jasypt/tree/master/src/test/projects/sample) checked in as part of the repository that shows the plugin being used (and has tests that exercise the functionality).  The [Patient domain object](https://github.com/dtanner/grails-jasypt/blob/master/src/test/projects/sample/grails-app/domain/com/bloomhealthco/domain/Patient.groovy) has encrypted firstName and lastName fields on it.
 
 
 ### Release Notes
+* 2.0.1 - initial support for Grails 3
 * 1.3.1 - initial support for Hibernate 4
 * 1.2.1 - code cleanup contribution from Burt Beckwith
 * 1.2.0 - support grails 2.3.8 and up

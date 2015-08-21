@@ -1,6 +1,6 @@
 language: groovy
 jdk:
   - oraclejdk7
-script: cd test-jasypt
-  && ./grailsw refresh-dependencies
-  && ./grailsw test-app
+script: ./gradlew clean check install
+  && cd src/test/projects/sample
+  && ./gradlew check
