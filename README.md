@@ -6,7 +6,7 @@ It also comes with the [Bouncy Castle](http://www.bouncycastle.org/java.html) en
 
 ```
 plugins {
-    compile ":jasypt-encryption:x.x.x"
+    compile "org.grails.plugins:jasypt-encryption:x.x.x"
 }
 ```
 
