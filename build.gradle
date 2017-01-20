@@ -16,7 +16,7 @@ plugins {
     id "com.jfrog.bintray" version "1.2"
 }
 
-version "2.0.2-SNAPSHOT"
+version "2.0.2"
 group "org.grails.plugins"
 
 apply plugin: 'maven-publish'
@@ -94,11 +94,6 @@ task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
 
-jar {
-    exclude "application.groovy"
-    exclude "src/test/projects/**"
-}
-
 bintray {
     pkg {
         userOrg = 'dtanner'
@@ -117,4 +112,5 @@ bintray {
     }
 }
 
-bintrayUpload.dependsOn build, sourcesJar, javadocJar
+// publish hack: can't depend on generatePomFileForMavenPublication cause it's in remote gradle file. call that task first.
+bintrayUpload.dependsOn jar, sourcesJar, javadocJar
