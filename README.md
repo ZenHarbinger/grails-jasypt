@@ -10,7 +10,7 @@ plugins {
 }
 ```
 
-If your app is using **Grails 3** or higher, then use version **2.0.1** of this plugin.  
+If your app is using **Grails 3** or higher, then use version **2.0.2** of this plugin.  
 If your app is using **Grails 2** and **Hibernate 4**, then use version **1.3.1** of this plugin.  
 If your app is using **Grails 2** and **Hibernate 3**, then use version **1.2.1** of this plugin.  
 
