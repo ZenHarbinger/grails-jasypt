@@ -49,6 +49,14 @@ abstract class DefaultParametersUserType<T extends UserType & ParameterizedType>
         innerType.nullSafeSet(preparedStatement, value, index, null)
     }
 
+    void nullSafeSet(java.sql.PreparedStatement preparedStatement, java.lang.Object value, int index, org.hibernate.engine.spi.SharedSessionContractImplementor sharedSessionContractImplementor) {
+        innerType.nullSafeSet(preparedStatement, value, index, null)
+    }
+
+    Object nullSafeGet(java.sql.ResultSet resultSet, java.lang.String[] names, org.hibernate.engine.spi.SharedSessionContractImplementor sharedSessionContractImplementor, java.lang.Object owner) {
+        innerType.nullSafeGet(resultSet, names, null, owner)
+    }
+
     def deepCopy(value) {
         innerType.deepCopy(value)
     }
