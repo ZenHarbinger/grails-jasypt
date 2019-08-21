@@ -4,6 +4,8 @@ import grails.test.mixin.integration.Integration
 import grails.transaction.*
 import groovy.sql.Sql
 import spock.lang.*
+import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
 
 @Integration
 @Rollback

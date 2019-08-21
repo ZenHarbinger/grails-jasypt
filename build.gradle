@@ -8,6 +8,7 @@ buildscript {
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+        classpath "org.grails.plugins:hibernate5:${gormVersion - ".RELEASE"}"
     }
 }
 
@@ -19,6 +20,7 @@ plugins {
 version "4.0.0-SNAPSHOT"
 group "org.grails.plugins"
 
+apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 
