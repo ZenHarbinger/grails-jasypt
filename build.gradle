@@ -13,11 +13,11 @@ buildscript {
 }
 
 plugins {
-    // id "io.spring.dependency-management" version "0.5.2.RELEASE"
-//    id "com.jfrog.bintray" version "1.2"
+    id "io.spring.dependency-management" version "0.5.2.RELEASE"
+    id "com.jfrog.bintray" version "1.4"
 }
 
-version "4.0.0-SNAPSHOT"
+version "4.0.0"
 group "org.grails.plugins"
 
 apply plugin: 'maven'
@@ -92,27 +92,27 @@ dependencies {
     compile 'org.bouncycastle:bcprov-jdk16:1.46'
 }
 
-// task wrapper(type: Wrapper) {
-//     gradleVersion = gradleWrapperVersion
-// }
+ bintray {
+     user = System.getenv('BINTRAY_USER')
+     key = System.getenv('BINTRAY_KEY')
 
-// bintray {
-//     pkg {
-//         userOrg = 'dtanner'
-//         repo = 'grails-plugins'
-//         name = "org.grails.plugins:$project.name"
-//         desc = "Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration"
-//         websiteUrl = "http://grails.org/plugin/$project.name"
-//         issueTrackerUrl = "https://github.com/dtanner/grails-jasypt/issues"
-//         vcsUrl = "https://github.com/dtanner/grails-jasypt"
-//         licenses = ['Apache-2.0']
-//         publicDownloadNumbers = true
-//         version {
-//             attributes = ['grails-plugin': "org.grails.plugins:$project.name"]
-//             name = project.version
-//         }
-//     }
-// }
+     pkg {
+         userOrg = 'dtanner'
+         repo = 'grails-plugins'
+         name = "org.grails.plugins:$project.name"
+         websiteUrl = "http://grails.org/plugin/$project.name"
+         issueTrackerUrl = "https://github.com/dtanner/grails-jasypt/issues"
+         vcsUrl = "https://github.com/dtanner/grails-jasypt"
+         licenses = ['Apache-2.0']
+         publicDownloadNumbers = true
+         version {
+             name = project.version
+             desc = "Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration"
+             vcsTag = project.version
+             attributes = ['grails-plugin': "org.grails.plugins:$project.name"]
+         }
+     }
+ }
 
 // publish hack: can't depend on generatePomFileForMavenPublication cause it's in remote gradle file. call that task first.
-// bintrayUpload.dependsOn jar, sourcesJar, javadocJar
+bintrayUpload.dependsOn jar, sourcesJar, javadocJar
