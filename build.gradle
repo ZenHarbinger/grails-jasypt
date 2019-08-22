@@ -8,17 +8,19 @@ buildscript {
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+        classpath "org.grails.plugins:hibernate5:${gormVersion - ".RELEASE"}"
     }
 }
 
 plugins {
-    id "io.spring.dependency-management" version "0.5.2.RELEASE"
-    id "com.jfrog.bintray" version "1.2"
+    // id "io.spring.dependency-management" version "0.5.2.RELEASE"
+//    id "com.jfrog.bintray" version "1.2"
 }
 
-version "2.0.3-SNAPSHOT"
+version "4.0.0-SNAPSHOT"
 group "org.grails.plugins"
 
+apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 
@@ -43,13 +45,13 @@ idea.project.ipr {
     }
 }
 
-apply plugin: "spring-boot"
+//apply plugin: "spring-boot"
 apply plugin: "org.grails.grails-plugin"
 apply plugin: "org.grails.grails-gsp"
 
 // Used for publishing to central repository, remove if not needed
-apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/grailsCentralPublishing.gradle'
-apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/bintrayPublishing.gradle'
+//apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/grailsCentralPublishing.gradle'
+//apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/bintrayPublishing.gradle'
 
 ext {
     grailsVersion = project.grailsVersion
@@ -84,33 +86,33 @@ dependencies {
 
     testCompile "org.grails:grails-plugin-testing"
 
-    compile 'org.grails.plugins:hibernate'
-    compile 'org.jasypt:jasypt:1.9.2'
-    compile 'org.jasypt:jasypt-hibernate4:1.9.2'
+    compile 'org.grails.plugins:hibernate5'
+    compile 'org.jasypt:jasypt:1.9.3'
+    compile 'org.jasypt:jasypt-hibernate5:1.9.3'
     compile 'org.bouncycastle:bcprov-jdk16:1.46'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = gradleWrapperVersion
-}
+// task wrapper(type: Wrapper) {
+//     gradleVersion = gradleWrapperVersion
+// }
 
-bintray {
-    pkg {
-        userOrg = 'dtanner'
-        repo = 'grails-plugins'
-        name = "org.grails.plugins:$project.name"
-        desc = "Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration"
-        websiteUrl = "http://grails.org/plugin/$project.name"
-        issueTrackerUrl = "https://github.com/dtanner/grails-jasypt/issues"
-        vcsUrl = "https://github.com/dtanner/grails-jasypt"
-        licenses = ['Apache-2.0']
-        publicDownloadNumbers = true
-        version {
-            attributes = ['grails-plugin': "org.grails.plugins:$project.name"]
-            name = project.version
-        }
-    }
-}
+// bintray {
+//     pkg {
+//         userOrg = 'dtanner'
+//         repo = 'grails-plugins'
+//         name = "org.grails.plugins:$project.name"
+//         desc = "Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration"
+//         websiteUrl = "http://grails.org/plugin/$project.name"
+//         issueTrackerUrl = "https://github.com/dtanner/grails-jasypt/issues"
+//         vcsUrl = "https://github.com/dtanner/grails-jasypt"
+//         licenses = ['Apache-2.0']
+//         publicDownloadNumbers = true
+//         version {
+//             attributes = ['grails-plugin': "org.grails.plugins:$project.name"]
+//             name = project.version
+//         }
+//     }
+// }
 
 // publish hack: can't depend on generatePomFileForMavenPublication cause it's in remote gradle file. call that task first.
-bintrayUpload.dependsOn jar, sourcesJar, javadocJar
+// bintrayUpload.dependsOn jar, sourcesJar, javadocJar
