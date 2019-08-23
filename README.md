@@ -147,6 +147,7 @@ For now, documentation is a little light.  There's a [test project](https://gith
 
 
 ### Release Notes
+* 4.0.3 - initial support for Grails 4
 * 2.0.1 - initial support for Grails 3
 * 1.3.1 - initial support for Hibernate 4
 * 1.2.1 - code cleanup contribution from Burt Beckwith
