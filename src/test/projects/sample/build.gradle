@@ -52,7 +52,7 @@ dependencyManagement {
 }
 
 dependencies {
-    compile "org.grails.plugins:jasypt-encryption:4.0.0-SNAPSHOT"
+    compile "org.grails.plugins:jasypt-encryption:4.0.3"
     testCompile "org.grails:grails-gorm-testing-support"
 
     compile "org.springframework.boot:spring-boot-starter-logging"
@@ -80,6 +80,3 @@ dependencies {
     console "org.grails:grails-console"
 }
 
-// task wrapper(type: Wrapper) {
-//     gradleVersion = gradleWrapperVersion
-// }

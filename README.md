@@ -1,5 +1,3 @@
-> Currently unmaintained and available for a new owner.
-
 The Grails Jasypt Encryption plugin provides strong field-level encryption support on Grails GORM String fields.  It leverages the [Jasypt](http://www.jasypt.org) simplified encryption framework that makes working with the Java Cryptographic Extension (JCE) much easier.
 
 It also comes with the [Bouncy Castle](http://www.bouncycastle.org/java.html) encryption provider, which gives you access to the very secure [AES](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard) algorithm.  
@@ -11,7 +9,7 @@ plugins {
     compile "org.grails.plugins:jasypt-encryption:x.x.x"
 }
 ```
-
+If your app is using **Grails 4** or higher, then use version **4.0.3** of this plugin.  
 If your app is using **Grails 3** or higher, then use version **2.0.2** of this plugin.  
 If your app is using **Grails 2** and **Hibernate 4**, then use version **1.3.1** of this plugin.  
 If your app is using **Grails 2** and **Hibernate 3**, then use version **1.2.1** of this plugin.  
@@ -149,6 +147,7 @@ For now, documentation is a little light.  There's a [test project](https://gith
 
 
 ### Release Notes
+* 4.0.3 - initial support for Grails 4
 * 2.0.1 - initial support for Grails 3
 * 1.3.1 - initial support for Hibernate 4
 * 1.2.1 - code cleanup contribution from Burt Beckwith
