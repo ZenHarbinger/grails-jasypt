@@ -17,11 +17,9 @@ plugins {
     id "com.jfrog.bintray" version "1.4"
 }
 
-version "4.0.0"
+version "4.0.3"
 group "org.grails.plugins"
 
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 
 apply plugin: 'idea'
@@ -45,13 +43,9 @@ idea.project.ipr {
     }
 }
 
-//apply plugin: "spring-boot"
 apply plugin: "org.grails.grails-plugin"
+apply plugin:"org.grails.grails-plugin-publish"
 apply plugin: "org.grails.grails-gsp"
-
-// Used for publishing to central repository, remove if not needed
-//apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/grailsCentralPublishing.gradle'
-//apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/bintrayPublishing.gradle'
 
 ext {
     grailsVersion = project.grailsVersion
@@ -92,27 +86,17 @@ dependencies {
     compile 'org.bouncycastle:bcprov-jdk16:1.46'
 }
 
- bintray {
-     user = System.getenv('BINTRAY_USER')
-     key = System.getenv('BINTRAY_KEY')
+grailsPublish {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    repo = 'grails-plugins'
+    githubSlug = 'dtanner/grails-jasypt'
+    license {
+        name = 'Apache-2.0'
+    }
+    issueTrackerUrl = "https://github.com/dtanner/grails-jasypt/issues"
+    title = "grails-jasypt"
+    desc = "Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration"
+    developers = [tednaleid:"Ted Naleid", dtanner:"Dan Tanner"]
+}
 
-     pkg {
-         userOrg = 'dtanner'
-         repo = 'grails-plugins'
-         name = "org.grails.plugins:$project.name"
-         websiteUrl = "http://grails.org/plugin/$project.name"
-         issueTrackerUrl = "https://github.com/dtanner/grails-jasypt/issues"
-         vcsUrl = "https://github.com/dtanner/grails-jasypt"
-         licenses = ['Apache-2.0']
-         publicDownloadNumbers = true
-         version {
-             name = project.version
-             desc = "Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration"
-             vcsTag = project.version
-             attributes = ['grails-plugin': "org.grails.plugins:$project.name"]
-         }
-     }
- }
-
-// publish hack: can't depend on generatePomFileForMavenPublication cause it's in remote gradle file. call that task first.
-bintrayUpload.dependsOn jar, sourcesJar, javadocJar
