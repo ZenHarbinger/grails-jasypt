@@ -105,7 +105,7 @@ class Member {
 }
 ```
 
-One other caveat, if you're setting the length of the field within the database schema, you'll need to give yourself extra room as the encrypted value will be longer than the unencrypted value was.   This length will depend on the encryption algorithm that you use.  It's easy to write an integration test that can spit out all of the encrypted lengths for you.  See `testEncryptionWithLongNamesFit()` in the https://github.com/dtanner/grails-jasypt/blob/master/test-jasypt/test/integration/com/bloomhealthco/domain/JasyptDomainEncryptionTests.groovy for an example.
+One other caveat, if you're setting the length of the field within the database schema, you'll need to give yourself extra room as the encrypted value will be longer than the unencrypted value was.   This length will depend on the encryption algorithm that you use.  It's easy to write an integration test that can spit out all of the encrypted lengths for you.  See `testEncryptionWithLongNamesFit()` in the https://github.com/ZenHarbinger/grails-jasypt/blob/master/test-jasypt/test/integration/com/bloomhealthco/domain/JasyptDomainEncryptionTests.groovy for an example.
 
 ### Custom Encryption Types
 
@@ -145,7 +145,7 @@ public class GormEncryptedLocalDateAsStringType extends JasyptConfiguredUserType
 
 ### Further Documentation
 
-For now, documentation is a little light.  There's a [test project](https://github.com/dtanner/grails-jasypt/tree/master/src/test/projects/sample) checked in as part of the repository that shows the plugin being used (and has tests that exercise the functionality).  The [Patient domain object](https://github.com/dtanner/grails-jasypt/blob/master/src/test/projects/sample/grails-app/domain/com/bloomhealthco/domain/Patient.groovy) has encrypted firstName and lastName fields on it.
+For now, documentation is a little light.  There's a [test project](https://github.com/ZenHarbinger/grails-jasypt/tree/master/src/test/projects/sample) checked in as part of the repository that shows the plugin being used (and has tests that exercise the functionality).  The [Patient domain object](https://github.com/ZenHarbinger/grails-jasypt/blob/master/src/test/projects/sample/grails-app/domain/com/bloomhealthco/domain/Patient.groovy) has encrypted firstName and lastName fields on it.
 
 
 ### Release Notes
