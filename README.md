@@ -103,7 +103,7 @@ class Member {
 }
 ```
 
-One other caveat, if you're setting the length of the field within the database schema, you'll need to give yourself extra room as the encrypted value will be longer than the unencrypted value was.   This length will depend on the encryption algorithm that you use.  It's easy to write an integration test that can spit out all of the encrypted lengths for you.  See `testEncryptionWithLongNamesFit()` in the https://github.com/ZenHarbinger/grails-jasypt/blob/master/test-jasypt/test/integration/com/bloomhealthco/domain/JasyptDomainEncryptionTests.groovy for an example.
+One other caveat, if you're setting the length of the field within the database schema, you'll need to give yourself extra room as the encrypted value will be longer than the unencrypted value was.   This length will depend on the encryption algorithm that you use.  It's easy to write an integration test that can spit out all of the encrypted lengths for you.  See `testEncryptionWithLongNamesFit()` in the https://github.com/ZenHarbinger/grails-jasypt/blob/master/src/test/projects/sample/src/integration-test/groovy/com/bloomhealthco/domain/JasyptDomainEncryptionTests.groovy for an example.
 
 ### Custom Encryption Types
 
