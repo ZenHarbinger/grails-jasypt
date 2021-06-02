@@ -17,8 +17,8 @@ plugins {
     id "com.jfrog.bintray" version "1.4"
 }
 
-version "4.0.3"
-group "org.grails.plugins"
+version "4.0.10"
+group "org.tros"
 
 apply plugin: 'eclipse'
 
