@@ -31,3 +31,4 @@ plugin.xml
 jasypt-encryption/web-app/WEB-INF
 test-jasypt/web-app/WEB-INF/tld/c.tld
 test-jasypt/web-app/WEB-INF/tld/fmt.tld
+.secret/

@@ -5,24 +5,26 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "org.grails.plugins:hibernate5:${gormVersion - ".RELEASE"}"
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.0.10"
+        classpath "io.github.gradle-nexus:publish-plugin:1.0.0"
     }
 }
 
 plugins {
     id "io.spring.dependency-management" version "0.5.2.RELEASE"
-    id "com.jfrog.bintray" version "1.4"
 }
 
-version "4.0.10"
+version "4.0.4"
 group "org.tros"
 
 apply plugin: 'eclipse'
-
 apply plugin: 'idea'
+
 idea.module.iml {
     beforeMerged { module ->
         module.dependencies.clear()
@@ -44,8 +46,10 @@ idea.project.ipr {
 }
 
 apply plugin: "org.grails.grails-plugin"
-apply plugin:"org.grails.grails-plugin-publish"
 apply plugin: "org.grails.grails-gsp"
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply plugin: "io.github.gradle-nexus.publish-plugin"
 
 ext {
     grailsVersion = project.grailsVersion
@@ -86,17 +90,73 @@ dependencies {
     compile 'org.bouncycastle:bcprov-jdk16:1.46'
 }
 
-grailsPublish {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    repo = 'grails-plugins'
-    githubSlug = 'dtanner/grails-jasypt'
-    license {
-        name = 'Apache-2.0'
+//https://grails.org/blog/2021-04-07-publish-grails-plugin-to-maven-central.html
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group
+            artifactId = 'jasypt-enctyption'
+            version = project.version
+
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom {
+                name = 'Grails Jasypt Plugin'
+                description = 'The Grails Jasypt Encryption plugin provides strong field-level encryption support on Grails GORM String fields.'
+                url = 'https://github.com/ZenHarbinger/grails-jasypt/'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'ZenHarbinger'
+                        name = 'Matt Aguirre'
+                        email = 'matt@tros.org'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/ZenHarbinger/grails-jasypt.git'
+                    developerConnection = 'scm:git:ssh://github.com:ZenHarbinger/grails-jasypt.git'
+                    url = 'https://github.com/ZenHarbinger/grails-jasypt/'
+                }
+            }
+        }
     }
-    issueTrackerUrl = "https://github.com/dtanner/grails-jasypt/issues"
-    title = "grails-jasypt"
-    desc = "Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration"
-    developers = [tednaleid:"Ted Naleid", dtanner:"Dan Tanner"]
 }
 
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
+afterEvaluate {
+    signing {
+        required { isReleaseVersion && gradle.taskGraph.hasTask("publish") }
+        sign publishing.publications.maven
+    }
+}
+
+tasks.withType(Sign) {
+    onlyIf { isReleaseVersion }
+}
+
+ext."signing.keyId" = project.hasProperty("signing.keyId") ? project.getProperty('signing.keyId') : System.getenv('SIGNING_KEY_ID')
+ext."signing.password" = project.hasProperty("signing.password") ? project.getProperty('signing.password') : System.getenv('SIGNING_PASSPHRASE')
+ext."signing.secretKeyRingFile" = project.hasProperty("signing.secretKeyRingFile") ? project.getProperty('signing.secretKeyRingFile') : (System.getenv('SECRING_FILE')?:"${System.properties['user.home']}${File.separator}.gnupg${File.separator}secring.gpg")
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            def ossUser = System.getenv("SONATYPE_USERNAME") ?: project.hasProperty("sonatypeOssUsername") ? project.sonatypeOssUsername : ''
+            def ossPass = System.getenv("SONATYPE_PASSWORD") ?: project.hasProperty("sonatypeOssPassword") ? project.sonatypeOssPassword : ''
+            def ossStagingProfileId = System.getenv("SONATYPE_STAGING_PROFILE_ID") ?: project.hasProperty("sonatypeOssStagingProfileId") ? project.sonatypeOssStagingProfileId : ''
+            nexusUrl = uri("https://oss.sonatype.org/service/local/")
+            snapshotRepositoryUrl = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+            username = ossUser
+            password = ossPass
+            stagingProfileId = ossStagingProfileId
+        }
+    }
+}

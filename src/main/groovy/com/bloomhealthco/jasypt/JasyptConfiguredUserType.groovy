@@ -38,13 +38,13 @@ class JasyptConfiguredUserType<T extends UserType & ParameterizedType> extends D
      * @return a default config that expects an encryptor name of gormEncryptor
      */
     Map getDefaultParameters() {
-        Map<String, Object> defaultParameters = new LinkedHashMap<String, Object>((int)jasyptConfig.size())
-		  defaultParameters.putAll(jasyptConfig)
+        Map<String, Object> defaultParameters = new LinkedHashMap<String, Object>((int) jasyptConfig.size())
+        defaultParameters.putAll(jasyptConfig)
         if (
-                !defaultParameters[ParameterNaming.ALGORITHM] &&
-                        !defaultParameters[ParameterNaming.PASSWORD] &&
-                        !defaultParameters[ParameterNaming.KEY_OBTENTION_ITERATIONS] &&
-                        !defaultParameters[ParameterNaming.ENCRYPTOR_NAME]
+        !defaultParameters[ParameterNaming.ALGORITHM] &&
+                !defaultParameters[ParameterNaming.PASSWORD] &&
+                !defaultParameters[ParameterNaming.KEY_OBTENTION_ITERATIONS] &&
+                !defaultParameters[ParameterNaming.ENCRYPTOR_NAME]
         ) {
             defaultParameters[ParameterNaming.ENCRYPTOR_NAME] = 'gormEncryptor'
         }
@@ -82,6 +82,6 @@ class JasyptConfiguredUserType<T extends UserType & ParameterizedType> extends D
      * @return the jasypt config specified in Config.groovy
      */
     Map<String, Object> getJasyptConfig() {
-        (Map<String, Object>)(Holders.config?.jasypt ?: [:])
+        (Map<String, Object>) (Holders.config?.jasypt ?: [:])
     }
 }

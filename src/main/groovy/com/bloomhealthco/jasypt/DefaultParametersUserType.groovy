@@ -16,14 +16,15 @@ import org.hibernate.usertype.UserType
  *
  * We use composition so that we can add this behavior to otherwise declared final UserTypes.
  * We'd love to use a Mixin but Hibernate's reflection utils don't play nice with Groovys ryntime mixins
- * @param < T > the existing Parameterized UserType we want to add the default parmaters to
+ * @param <T >  the existing Parameterized UserType we want to add the default parmaters to
  */
+//abstract class DefaultParametersUserType<T extends UserType & ParameterizedType> implements UserType, ParameterizedType {
 @CompileStatic
-abstract class DefaultParametersUserType<T extends UserType & ParameterizedType> implements UserType, ParameterizedType {
+abstract class DefaultParametersUserType<T extends UserType> implements UserType, ParameterizedType {
 
     // Nifty little reflection trick to figure out the actual class the subclass provides
     // UserTypes have to have a default parameterless constructor so we're safe to call it here
-    protected final T innerType = (T)((Class<T>)(((java.lang.reflect.ParameterizedType)getClass().genericSuperclass).actualTypeArguments[0])).newInstance()
+    protected final T innerType = (T) ((Class<T>) (((java.lang.reflect.ParameterizedType) getClass().genericSuperclass).actualTypeArguments[0])).newInstance()
 
     int[] sqlTypes() {
         innerType.sqlTypes()
@@ -80,7 +81,7 @@ abstract class DefaultParametersUserType<T extends UserType & ParameterizedType>
     @CompileStatic(TypeCheckingMode.SKIP)
     void setParameterValues(Properties properties) {
         def params = defaultParameters + (properties ?: [:]) as Properties
-        ((ParameterizedType)innerType).setParameterValues params
+        ((ParameterizedType) innerType).setParameterValues(params)
     }
 
     abstract Map getDefaultParameters()

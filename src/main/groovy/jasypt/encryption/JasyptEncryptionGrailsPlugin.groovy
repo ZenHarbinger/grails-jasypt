@@ -16,7 +16,7 @@ class JasyptEncryptionGrailsPlugin extends Plugin {
     }
 
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "3.0.3 > *"
+    def grailsVersion = "4.0.0 > *"
   
     def title = "Jasypt Encryption"
     def description = 'Integration with Jasypt, allows easy encryption of information including Hibernate/GORM integration'
@@ -25,10 +25,11 @@ class JasyptEncryptionGrailsPlugin extends Plugin {
             [name: "Ted Naleid", email: 'contact@naleid.com'],
             [name: "Jon Palmer"],
             [name: "Dan Tanner", email: 'dan@dantanner.com'],
+            [name: "Matt Aguirre", email: 'matt@tros.org'],
     ]
     def documentation = "http://grails.org/plugin/jasypt-encryption"
-    def issueManagement = [system: "GITHUB", url: "https://github.com/dtanner/grails-jasypt/issues"]
-    def scm = [url: "https://github.com/dtanner/grails-jasypt"]
+    def issueManagement = [system: "GITHUB", url: "https://github.com/ZenHarbinger/grails-jasypt/issues"]
+    def scm = [url: "https://github.com/ZenHarbinger/grails-jasypt"]
     def profiles = ['web']
 
 }
