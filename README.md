@@ -5,11 +5,13 @@ It also comes with the [Bouncy Castle](http://www.bouncycastle.org/java.html) en
 ### Installation
 
 ```
-plugins {
-    compile "org.grails.plugins:jasypt-encryption:x.x.x"
+dependencies {
+    compile "org.tros:jasypt-encryption:4.0.4"
 }
 ```
-If your app is using **Grails 4** or higher, then use version **4.0.3** of this plugin.  
+If your app is using **Grails 4** or higher, then use version **4.0.4** of this plugin.  
+
+#### No longer supported
 If your app is using **Grails 3** or higher, then use version **2.0.2** of this plugin.  
 If your app is using **Grails 2** and **Hibernate 4**, then use version **1.3.1** of this plugin.  
 If your app is using **Grails 2** and **Hibernate 3**, then use version **1.2.1** of this plugin.  
@@ -147,6 +149,7 @@ For now, documentation is a little light.  There's a [test project](https://gith
 
 
 ### Release Notes
+* 4.0.4 - Move to maven central, new group ID, can compile against Grails > 4.0.5
 * 4.0.3 - initial support for Grails 4
 * 2.0.1 - initial support for Grails 3
 * 1.3.1 - initial support for Hibernate 4
